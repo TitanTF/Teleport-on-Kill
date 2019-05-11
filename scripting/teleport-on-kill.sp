@@ -18,7 +18,11 @@ public Action Event_PlayerDeath(Handle hEvent, const char[] sEventName, bool bDo
 	int iVictim = GetClientOfUserId(GetEventInt(hEvent, "userid"));
 	int iAttacker = GetClientOfUserId(GetEventInt(hEvent, "attacker"));
 	
-	if (IsValidClient(iVictim) && IsValidClient(iAttacker))
+	int iDeathFlags = GetEventInt(hEvent, "death_flags");
+	if (iDeathFlags & 32)
+		return Plugin_Handled;
+		
+	if (IsValidClient(iVictim) && IsValidClient(iAttacker) && iVictim != iAttacker && IsPlayerAlive(iAttacker))
 	{
 		float vPos[3];
 		GetClientAbsOrigin(iVictim, vPos);
