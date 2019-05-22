@@ -32,6 +32,8 @@ public Action Event_PlayerDeath(Handle hEvent, const char[] sEventName, bool bDo
 		
 		TeleportEntity(iAttacker, vPos, vAng, NULL_VECTOR);
 	}
+	
+	return Plugin_Handled;
 }
 
 stock bool IsValidClient(int iClient, bool bReplay = true)
